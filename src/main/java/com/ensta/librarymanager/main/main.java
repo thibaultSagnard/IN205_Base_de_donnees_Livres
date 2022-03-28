@@ -9,6 +9,7 @@ public class main {
 		try {
 			System.out.println(livreService.getById(1));
 			System.out.println(livreService.create("Narnia", "CS Lewis", "CSL"));
+			System.out.println(livreService.getById(11));
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

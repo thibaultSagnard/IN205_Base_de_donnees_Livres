@@ -11,4 +11,5 @@ public interface IMembreDao {
 	public void update(Membre membre) throws DaoException;
 	public void delete(int id) throws DaoException;
 	public int count() throws DaoException;
+	public List<Membre> getListMembreEmpruntPossible() throws DaoException; //ajouté
 }

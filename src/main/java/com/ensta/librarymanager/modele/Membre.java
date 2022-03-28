@@ -6,6 +6,9 @@ public class Membre {
 	private String Prenom;
 	private String Adresse;
 	private Abonnement abonnement;
+	private String Mail;
+	private String Telephone;
+	
 
 	public Membre() {
 	}
@@ -16,6 +19,16 @@ public class Membre {
 		this.Prenom = Prenom;
 		this.Adresse = Adresse;
 		this.abonnement = Abon;
+	}
+	
+	public Membre(int IdPrimaryKey, String Nom, String Prenom, String Adresse, String Mail, String Telephone, Abonnement Abon) {
+		this.IdPrimaryKey = IdPrimaryKey;
+		this.Nom = Nom;
+		this.Prenom = Prenom;
+		this.Adresse = Adresse;
+		this.abonnement = Abon;
+		this.setMail(Mail);
+		this.setTelephone(Telephone);
 	}
 
 	public int getIdPrimaryKey() {
@@ -56,5 +69,21 @@ public class Membre {
 
 	public void setAbonnement(Abonnement abonnement) {
 		this.abonnement = abonnement;
+	}
+
+	public String getTelephone() {
+		return Telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		Telephone = telephone;
+	}
+
+	public String getMail() {
+		return Mail;
+	}
+
+	public void setMail(String mail) {
+		Mail = mail;
 	}
 }

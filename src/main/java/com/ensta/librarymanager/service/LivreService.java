@@ -26,8 +26,12 @@ public class LivreService implements ILivreService {
 	
 	@Override
 	public List<Livre> getList() throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return this.livreDao.getList();
+		} catch (DaoException e) {
+			e.printStackTrace();
+			throw new ServiceException();
+		}
 	}
 
 	@Override

@@ -107,7 +107,7 @@ public class LivreDao implements ILivreDao {
 			pstmt.setString(1, titre);
 			pstmt.setString(2,  auteur);
 			pstmt.setString(3, isbn);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			return pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -140,8 +140,17 @@ public class LivreDao implements ILivreDao {
 
 	@Override
 	public void delete(int id) throws DaoException {
-		// TODO Auto-generated method stub
+		try {
+			Connection conn = ConnectionManager.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM livre WHERE id = ?;");
 
+			pstmt.setInt(1, id);
+			pstmt.executeQuery();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new DaoException();
+		}
 	}
 
 	@Override
