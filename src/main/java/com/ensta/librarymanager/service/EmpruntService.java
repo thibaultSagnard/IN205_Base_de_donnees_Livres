@@ -94,7 +94,8 @@ public class EmpruntService implements IEmpruntService {
 	@Override
 	public void returnBook(int id) throws ServiceException {
 		try {
-			this.empruntDao.returnBook(id);
+			Emprunt emprunt = getById(id);
+			this.empruntDao.update(emprunt);
 		} catch (DaoException e) {
 			e.printStackTrace();
 			throw new ServiceException();

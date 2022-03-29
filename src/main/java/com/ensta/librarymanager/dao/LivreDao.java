@@ -130,7 +130,7 @@ public class LivreDao implements ILivreDao {
 			pstmt.setString(2,  auteur);
 			pstmt.setString(3, isbn);
 			
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -145,7 +145,7 @@ public class LivreDao implements ILivreDao {
 			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM livre WHERE id = ?;");
 
 			pstmt.setInt(1, id);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

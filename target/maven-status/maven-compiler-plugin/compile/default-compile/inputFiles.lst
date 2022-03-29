@@ -1,3 +1,4 @@
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/MembreDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/modele/Abonnement.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/exception/ServiceException.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/modele/Livre.java
@@ -14,6 +15,7 @@
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/DashboardServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/EmpruntDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/EmpruntService.java
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/IMembreService.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/IMembreDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/LivreDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/persistence/ConnectionManager.java

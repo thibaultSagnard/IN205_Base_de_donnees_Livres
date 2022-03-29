@@ -201,7 +201,7 @@ public class EmpruntDao implements IEmpruntDao{
 			pstmt.setInt(2, idLivre);
 			pstmt.setString(3, dateEmprunt.toString());
 			
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -221,7 +221,11 @@ public class EmpruntDao implements IEmpruntDao{
 			pstmt.setInt(1, emprunt.getIdMembre());
 			pstmt.setInt(2, emprunt.getIdLivre());
 			pstmt.setString(3, emprunt.getDateEmprunt().toString());
-			pstmt.executeQuery();
+			LocalDate date =LocalDate.now();
+		    String Date = date.toString();
+			pstmt.setString(4, Date);
+			pstmt.setInt(5,  emprunt.getIdPrimaryKey());
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -251,7 +255,7 @@ public class EmpruntDao implements IEmpruntDao{
 		}
 	}
 
-	@Override
+	/*@Override
 	public void returnBook(int id) throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -262,15 +266,15 @@ public class EmpruntDao implements IEmpruntDao{
 	        String Date = date.toString();
 			pstmt.setString(1, Date);
 			pstmt.setInt(2, id);
-			delete(id);
-			pstmt.executeQuery();
+			//delete(id);
+			pstmt.executeUpdate();
 			
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 
 	@Override
 	public boolean isLivreDispo(int idLivre) throws DaoException {
@@ -283,7 +287,7 @@ public class EmpruntDao implements IEmpruntDao{
 			if (rs != null) {
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				dateR = LocalDate.parse(rs.getString("emprunt.dateRetour"), formatter);
-				if (dateR==null) { //le livre est actuellememnt emprunté
+				if (dateR==null) { //le livre est actuellement emprunté
 					return false;
 				}
 			}
@@ -321,18 +325,19 @@ public class EmpruntDao implements IEmpruntDao{
 		}
 	}
 
-	@Override
+
+	/*@Override
 	public void delete(int id) throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement("DELETE emprunt WHERE id = ?");
 			pstmt.setInt(1, id);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 
 }

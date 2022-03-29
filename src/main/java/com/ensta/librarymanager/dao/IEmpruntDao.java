@@ -16,9 +16,9 @@ public interface IEmpruntDao {
 	public void create(int idMembre, int idLivre, LocalDate dateEmprunt) throws DaoException;
 	public void update(Emprunt emprunt) throws DaoException;
 	public int count() throws DaoException;
-	public void returnBook(int id) throws DaoException; //ajouté
+	//public void returnBook(int id) throws DaoException; //ajouté
 	public boolean isLivreDispo(int idLivre) throws DaoException; //ajouté
 	public boolean isEmpruntPossible(Membre membre) throws DaoException; //ajouté
-	public void delete(int id) throws DaoException; //ajouté
+	//public void delete(int id) throws DaoException; //ajouté
 
 }

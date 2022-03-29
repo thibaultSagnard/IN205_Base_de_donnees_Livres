@@ -84,7 +84,7 @@ private static MembreDao instance;
 					.prepareStatement("INSERT INTO membre(nom, prenom, adresse, email, telephone) "
 							+ "VALUES (?, ?, ?, ?, ?, ?);");
 
-			pstmt.setString(1, nom);
+			pstmt.setString(1, nom.toUpperCase());
 			pstmt.setString(2, prenom);
 			pstmt.setString(3, adresse);
 			pstmt.setString(4, email);
@@ -110,14 +110,14 @@ private static MembreDao instance;
 							+ "WHERE id = ?;");
 
 			pstmt.setInt(1, membre.getIdPrimaryKey());
-			pstmt.setString(2, membre.getNom());
+			pstmt.setString(2, membre.getNom().toUpperCase());
 			pstmt.setString(3, membre.getPrenom());
 			pstmt.setString(4, membre.getAdresse());
 			pstmt.setString(5, membre.getMail());
 			pstmt.setString(6, membre.getTelephone());
 			pstmt.setString(7, membre.getAbonnement().name());
 
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -133,7 +133,7 @@ private static MembreDao instance;
 			PreparedStatement pstmt = conn.prepareStatement("DELETE FROM membre WHERE id = ?;");
 
 			pstmt.setInt(1, id);
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
