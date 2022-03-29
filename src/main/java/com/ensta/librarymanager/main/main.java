@@ -13,7 +13,7 @@ public class main {
 			for (int i=11; i<=livreService.count(); i++) {
 				livreService.delete(i);
 			}
-			livreService.create("CS Lewis", "CSL");
+			//livreService.create("CS Lewis", "CSL");
 			System.out.println(livreService.getById(10));
 		} catch (ServiceException e) {
 			e.printStackTrace();

@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.ensta.librarymanager.exception.DaoException;
 import com.ensta.librarymanager.modele.Abonnement;
+import com.ensta.librarymanager.modele.Emprunt;
 import com.ensta.librarymanager.modele.Membre;
 import com.ensta.librarymanager.persistence.ConnectionManager;
 
@@ -178,8 +179,10 @@ private static MembreDao instance;
 				Abonnement abonnement = Abonnement.valueOf(rs.getString("abonnement"));
 				Membre membre = new Membre(id, nom, prenom, adresse, email, telephone, abonnement);
 				EmpruntDao empruntDao =EmpruntDao.getInstance();
-				boolean pos = empruntDao.isEmpruntPossible(membre);
-				if (pos==true) {
+				
+				List<Emprunt> liste = empruntDao.getListCurrentByMembre(id);
+				int nombre = liste.size(); //nombre de livre empruntés et non rendus par la personne
+				if ((abonnement==Abonnement.BASIC && nombre<2) || (abonnement==Abonnement.PREMIUM && nombre<5) || (abonnement==Abonnement.VIP && nombre<20)) {
 					result.add(membre);
 				}
 			}

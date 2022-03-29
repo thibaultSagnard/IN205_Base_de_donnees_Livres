@@ -1,7 +1,9 @@
 package com.ensta.librarymanager.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
+import com.ensta.librarymanager.dao.EmpruntDao;
 import com.ensta.librarymanager.dao.LivreDao;
 import com.ensta.librarymanager.exception.DaoException;
 import com.ensta.librarymanager.exception.ServiceException;
@@ -37,8 +39,19 @@ public class LivreService implements ILivreService {
 	@Override
 	public List<Livre> getListDispo() throws ServiceException {
 		try {
-			return this.livreDao.getListDispo();
-		} catch (DaoException e) {
+			List<Livre> List = null;
+			List<Livre> liste = getList();
+			EmpruntService emprunt = EmpruntService.getInstance();
+			
+			boolean dis;
+			for (int i=0; i<liste.size(); i++) {
+				dis = emprunt.isLivreDispo(liste.get(i).getIdPrimaryKey());
+				if (dis==true) {
+					List.add(liste.get(i));
+				}
+			}
+			return List;
+		} catch (ServiceException e) {
 			e.printStackTrace();
 			throw new ServiceException();
 		}

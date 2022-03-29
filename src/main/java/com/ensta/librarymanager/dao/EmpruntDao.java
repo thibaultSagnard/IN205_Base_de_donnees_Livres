@@ -276,7 +276,7 @@ public class EmpruntDao implements IEmpruntDao{
 		}
 	}*/
 
-	@Override
+	/*@Override
 	public boolean isLivreDispo(int idLivre) throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
@@ -297,9 +297,9 @@ public class EmpruntDao implements IEmpruntDao{
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 
-	@Override
+	/*@Override
 	public boolean isEmpruntPossible(Membre membre) throws DaoException {
 		try {
 			int idMembre = membre.getIdPrimaryKey();
@@ -323,7 +323,7 @@ public class EmpruntDao implements IEmpruntDao{
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 
 
 	/*@Override

@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDao;
 import com.ensta.librarymanager.dao.LivreDao;
 import com.ensta.librarymanager.exception.DaoException;
 import com.ensta.librarymanager.exception.ServiceException;
+import com.ensta.librarymanager.modele.Abonnement;
 import com.ensta.librarymanager.modele.Emprunt;
 import com.ensta.librarymanager.modele.Livre;
 import com.ensta.librarymanager.modele.Membre;
@@ -116,7 +118,14 @@ public class EmpruntService implements IEmpruntService {
 	@Override
 	public boolean isLivreDispo(int idLivre) throws ServiceException {
 		try {
-			return this.empruntDao.isLivreDispo(idLivre);
+			LocalDate dateR = LocalDate.now(); //valeur non nulle par défaut
+			Emprunt emprunt = this.empruntDao.getById(idLivre);
+			dateR = emprunt.getDateRetour();
+			if (dateR==null) { //le livre est actuellement emprunté
+				return false;
+			}
+			return true; //sinon il est rendu ou pas jamais pris
+			
 		} catch (DaoException e) {
 			e.printStackTrace();
 			throw new ServiceException();
@@ -126,7 +135,14 @@ public class EmpruntService implements IEmpruntService {
 	@Override
 	public boolean isEmpruntPossible(Membre membre) throws ServiceException {
 		try {
-			return this.empruntDao.isEmpruntPossible(membre);
+			int idMembre = membre.getIdPrimaryKey();
+			List<Emprunt> liste = this.empruntDao.getListCurrentByMembre(idMembre);
+			Abonnement ab = membre.getAbonnement();
+			int nombre = liste.size(); //nombre de livre empruntés et non rendus par la personne
+			if ((ab==Abonnement.BASIC && nombre<2) || (ab==Abonnement.PREMIUM && nombre<5) || (ab==Abonnement.VIP && nombre<20)) {
+				return true;
+			}
+			return false;
 		} catch (DaoException e) {
 			e.printStackTrace();
 			throw new ServiceException();

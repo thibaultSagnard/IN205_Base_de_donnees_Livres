@@ -52,7 +52,7 @@ public class LivreDao implements ILivreDao {
 		}
 	}
 	
-	public List<Livre> getListDispo() throws DaoException { ///à coder WHERE livre dispo avec jointure
+	/*public List<Livre> getListDispo() throws DaoException { ///à coder WHERE livre dispo avec jointure
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement("SELECT id, titre, auteur, isbn FROM livre");
@@ -76,7 +76,7 @@ public class LivreDao implements ILivreDao {
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 	
 	@Override
 	public Livre getById(int id) throws DaoException {
