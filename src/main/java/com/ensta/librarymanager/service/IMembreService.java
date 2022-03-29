@@ -14,5 +14,4 @@ public interface IMembreService {
 	public void update(Membre membre) throws ServiceException;
 	public void delete(int id) throws ServiceException;
 	public int count() throws ServiceException;
-
 }

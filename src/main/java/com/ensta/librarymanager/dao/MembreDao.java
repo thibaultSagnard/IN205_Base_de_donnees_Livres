@@ -161,7 +161,7 @@ private static MembreDao instance;
 		}
 	}
 
-	public List<Membre> getListMembreEmpruntPossible() throws DaoException {
+	/*public List<Membre> getListMembreEmpruntPossible() throws DaoException {
 		try {
 			List<Membre> result = null;
 			Connection conn = ConnectionManager.getConnection();
@@ -191,6 +191,6 @@ private static MembreDao instance;
 			e.printStackTrace();
 			throw new DaoException();
 		}
-	}
+	}*/
 
 }

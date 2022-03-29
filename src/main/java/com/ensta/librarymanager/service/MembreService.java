@@ -35,8 +35,18 @@ public class MembreService implements IMembreService{
 	@Override
 	public List<Membre> getListMembreEmpruntPossible() throws ServiceException {
 		try {
-			return this.membreDao.getListMembreEmpruntPossible();
-		} catch (DaoException e) {
+			List<Membre> liste = null;
+			List<Membre> List = getList();
+			boolean pos;
+			EmpruntService empruntService = EmpruntService.getInstance();
+			for (int i=0; i<List.size(); i++) {
+				pos = empruntService.isEmpruntPossible(List.get(i));
+				if (pos==true) {
+					liste.add(List.get(i));
+				}
+			}
+			return liste;
+		} catch (ServiceException e) {
 			e.printStackTrace();
 			throw new ServiceException();
 		}
@@ -92,5 +102,4 @@ public class MembreService implements IMembreService{
 			throw new ServiceException();
 		}
 	}
-
 }
