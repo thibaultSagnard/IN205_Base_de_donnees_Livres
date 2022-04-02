@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDao;
@@ -117,20 +118,38 @@ public class EmpruntService implements IEmpruntService {
 
 	@Override
 	public boolean isLivreDispo(int idLivre) throws ServiceException {
-		try {
+			boolean result = true;
+			List<Emprunt> emprunts = new ArrayList<>();
+			try
+			{
+				emprunts = this.getListCurrent(); 
+			}
+			catch (ServiceException e)
+			{
+				System.out.println(e.getMessage());
+			}
+			for(Emprunt e : emprunts)
+			{
+				if (e.getIdLivre()== idLivre) result = false;
+			} 
+			return result; 
+	}
+		
+		
+		/*try {
 			LocalDate dateR = LocalDate.now(); //valeur non nulle par défaut
 			Emprunt emprunt = this.empruntDao.getById(idLivre);
 			dateR = emprunt.getDateRetour();
-			if (dateR==null) { //le livre est actuellement emprunté
+			if (dateR==null || emprunt.getDateEmprunt()==null) { //le livre est actuellement emprunté ou jamais emprunté
 				return false;
 			}
-			return true; //sinon il est rendu ou pas jamais pris
+			return true; //sinon il est rendu
 			
 		} catch (DaoException e) {
 			e.printStackTrace();
 			throw new ServiceException();
 		}
-	}
+	}*/
 
 	@Override
 	public boolean isEmpruntPossible(Membre membre) throws ServiceException {

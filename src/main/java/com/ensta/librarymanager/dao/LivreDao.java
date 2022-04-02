@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.exception.DaoException;
@@ -32,10 +33,10 @@ public class LivreDao implements ILivreDao {
 			PreparedStatement pstmt = conn.prepareStatement("SELECT id, titre, auteur, isbn FROM livre");
 
 			ResultSet rs = pstmt.executeQuery();
-			List<Livre> Livres = null;
+			List<Livre> Livres = new ArrayList<>();
 
 			while (rs.next()==true) {
-				int id = Integer.parseInt(rs.getString("e.id"));
+				int id = Integer.parseInt(rs.getString("id"));
 				String titre = rs.getString("titre");
 				String auteur = rs.getString("auteur");
 				String isbn = rs.getString("isbn");
@@ -108,7 +109,14 @@ public class LivreDao implements ILivreDao {
 			pstmt.setString(2,  auteur);
 			pstmt.setString(3, isbn);
 			pstmt.executeUpdate();
-			return pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			
+			ResultSet resultSet = pstmt.getGeneratedKeys();
+			if (resultSet.next()) {
+				return (resultSet.getInt(1));
+			}
+
+			return 1;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -157,14 +165,11 @@ public class LivreDao implements ILivreDao {
 	public int count() throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT id, titre, auteur, isbn FROM livre");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(DISTINCT id) AS count FROM livre");
 
 			ResultSet rs = pstmt.executeQuery();
-			int nombre = 0;
-
-			while (rs.next()==true) {
-				nombre+=1;
-			}
+			rs.next();
+			int nombre = rs.getInt(1);
 			
 			return nombre;
 		

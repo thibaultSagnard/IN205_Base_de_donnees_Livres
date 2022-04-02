@@ -9,6 +9,10 @@ public class Emprunt {
 	private LocalDate DateEmprunt;
 	private LocalDate DateRetour;
 	
+	public Emprunt() {
+		this.DateEmprunt = null;
+		this.DateRetour = null;
+	}
 	public Emprunt(int id, int idMembre, int idLivre, LocalDate dateEmprunt, LocalDate dateRetour) {
 		this.IdPrimaryKey = id;
 		this.IdMembre = idMembre;
@@ -17,6 +21,14 @@ public class Emprunt {
 		this.DateRetour = dateRetour;
 	}
 
+	public Emprunt(int id, int idMembre, int idLivre, LocalDate dateEmprunt) {
+		this.IdPrimaryKey = id;
+		this.IdMembre = idMembre;
+		this.IdLivre = idLivre;
+		this.DateEmprunt = dateEmprunt;
+		this.DateRetour = null;
+	}
+	
 	public int getIdPrimaryKey() {
 		return IdPrimaryKey;
 	}

@@ -1,6 +1,7 @@
 package com.ensta.librarymanager.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDao;
@@ -39,8 +40,9 @@ public class LivreService implements ILivreService {
 	@Override
 	public List<Livre> getListDispo() throws ServiceException {
 		try {
-			List<Livre> List = null;
-			List<Livre> liste = getList();
+			List<Livre> List = new ArrayList<>();
+			LivreService livreService = LivreService.getInstance();
+			List<Livre> liste = livreService.getList();
 			EmpruntService emprunt = EmpruntService.getInstance();
 			
 			boolean dis;

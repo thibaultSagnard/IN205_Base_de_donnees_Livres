@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.exception.DaoException;
@@ -28,7 +29,7 @@ private static MembreDao instance;
 	@Override
 	public List<Membre> getList() throws DaoException {
 		try {
-			List<Membre> result = null;
+			List<Membre> result = new ArrayList<>();
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn
 					.prepareStatement("SELECT id, nom, prenom, adresse, email, telephone, abonnement "
@@ -92,9 +93,13 @@ private static MembreDao instance;
 			pstmt.setString(5, telephone);
 			//pstmt.setString(6, abonnement.getAbonnement.name());
 
-			pstmt.executeQuery();
+			pstmt.executeUpdate();
+			ResultSet resultSet = pstmt.getGeneratedKeys();
+			if (resultSet.next()) {
+				return (resultSet.getInt(1));
+			}
 
-			return pstmt.executeUpdate();
+			return 1;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -147,7 +152,7 @@ private static MembreDao instance;
 	public int count() throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(id) AS count FROM membre;");
+			PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(id) AS count FROM Membre;");
 
 			pstmt.executeQuery();
 			ResultSet rs = pstmt.executeQuery();

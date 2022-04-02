@@ -47,7 +47,7 @@
         <div class="col l4 s6">
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>1515</h3> <!-- TODO : afficher le nombre d'emprunts � la place de 1515 -->
+              <h3>15156</h3> <!-- TODO : afficher le nombre d'emprunts � la place de 1515 -->
               <p>Emprunts</p>
             </div>
             <div class="icon">

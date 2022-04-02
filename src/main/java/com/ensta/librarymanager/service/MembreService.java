@@ -1,5 +1,6 @@
 package com.ensta.librarymanager.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.ensta.librarymanager.dao.EmpruntDao;
@@ -35,8 +36,9 @@ public class MembreService implements IMembreService{
 	@Override
 	public List<Membre> getListMembreEmpruntPossible() throws ServiceException {
 		try {
-			List<Membre> liste = null;
-			List<Membre> List = getList();
+			List<Membre> liste = new ArrayList<>(); //contiendra la liste des gens qui peuvent encore emprunter
+			MembreService membreService = MembreService.getInstance();
+			List<Membre> List = membreService.getList();
 			boolean pos;
 			EmpruntService empruntService = EmpruntService.getInstance();
 			for (int i=0; i<List.size(); i++) {
