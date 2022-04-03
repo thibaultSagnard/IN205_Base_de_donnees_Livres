@@ -41,29 +41,31 @@ public class EmpruntDao implements IEmpruntDao{
 
 
 			ResultSet rs = pstmt.executeQuery();
-			List<Emprunt> Emprunts = null;
+			List<Emprunt> emprunts = new ArrayList<>();
 
 			while (rs.next()==true) {
-				int id = Integer.parseInt(rs.getString("e.id"));
+				int id = Integer.parseInt(rs.getString("id"));
 				int idMembre = Integer.parseInt(rs.getString("idMembre"));
-				/*String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				String adresse = rs.getString("adresse");
-				String email = rs.getString("email");
-				String telephone = rs.getString("telephone");*/
 				int idLivre = Integer.parseInt(rs.getString("idLivre"));
-				/*String titre = rs.getString("titre");
-				String auteur = rs.getString("auteur");
-				String ISBN = rs.getString("ISBN");*/
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 				LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-				LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);
-				
-				Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt, dateRetour);
-				Emprunts.add(emprunt);
+				LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);*/
+	            java.util.Date retour = new java.util.Date();
+				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
+	            Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt);
+
+				retour = rs.getDate("dateRetour");
+                if(rs.wasNull())
+                {
+                    emprunt.setDateRetour(null);
+                }
+                else
+                {
+                    emprunt.setDateRetour(rs.getDate("dateRetour").toLocalDate());
+                };
+                emprunts.add(emprunt);
 			}
-			
-			return Emprunts;
+			return emprunts;
 		
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -244,10 +246,10 @@ public class EmpruntDao implements IEmpruntDao{
 			pstmt.setInt(1, idMembre);
 			pstmt.setInt(2, idLivre);
 			pstmt.setString(3, dateEmprunt.toString());
+			pstmt.setString(4, null);
 			
 			pstmt.executeUpdate();
 
-			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new DaoException();
@@ -285,11 +287,8 @@ public class EmpruntDao implements IEmpruntDao{
 			PreparedStatement pstmt = conn.prepareStatement("SELECT COUNT(id) AS count FROM emprunt");
 
 			ResultSet rs = pstmt.executeQuery();
-			int nombre = 0;
-
-			while (rs.next()==true) {
-				nombre+=1;
-			}
+			rs.next();
+			int nombre = rs.getInt("count");
 			
 			return nombre;
 		

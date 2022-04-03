@@ -93,6 +93,8 @@ public class DashboardServlet extends HttpServlet {
         request.setAttribute("nbMembres", nbMembres);
         request.setAttribute("nbEmprunts", nbEmprunts);
         request.setAttribute("empruntsCourant", empruntsCourant);
+        request.setAttribute("livre", livreService);
+        request.setAttribute("membre", membreService);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/View/dashboard.jsp");
         dispatcher.forward(request, response);
     }

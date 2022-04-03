@@ -1,5 +1,7 @@
 package com.ensta.librarymanager.main;
 
+import java.time.LocalDate;
+
 import com.ensta.librarymanager.exception.ServiceException;
 import com.ensta.librarymanager.service.EmpruntService;
 import com.ensta.librarymanager.service.LivreService;
@@ -19,12 +21,14 @@ public class main {
 				livreService.delete(i);
 			}*/
 			//livreService.create("CS Lewis", "CSL");
-			System.out.println(livreService.getById(10));
+			/*System.out.println(livreService.getById(10));
 			System.out.println(livreService.count());
 			System.out.println(empruntService.getListCurrent().get(0).getIdPrimaryKey());
 			System.out.println(empruntService.isLivreDispo(0));
 			System.out.println(livreService.getListDispo().get(0).getTitre());
-			System.out.println(membreService.getListMembreEmpruntPossible().get(0).getNom());
+			System.out.println(membreService.getListMembreEmpruntPossible().get(0).getNom());*/
+			empruntService.create(1, 1, LocalDate.now());
+			System.out.println(empruntService.count());
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

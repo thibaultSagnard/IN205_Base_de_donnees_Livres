@@ -21,7 +21,7 @@
       </div>
       <div class="row">
       <div class="container">
-        <h5>Sélectionnez le livre et le membre emprunteur</h5>
+        <h5>Selectionnez le livre et le membre emprunteur</h5>
         <div class="row">
 	      <form action="/TP3Ensta/emprunt_add" method="post" class="col s12">
 	        <div class="row">
@@ -33,7 +33,6 @@
                     <option value="${livre.getIdPrimaryKey()}"> "${livre.getTitre()}", ${livre.getAuteur()}</option>
                   </c:forEach>
                 </c:if>
-	                <option value="idDuLivre">"Titre du livre", Nom de l'auteur</option>
 	            </select>
 	          </div>
 	          <div class="input-field col s6">
@@ -44,7 +43,6 @@
                     <option value="${membre.getIdPrimaryKey()}"> ${membre.getPrenom()} ${membre.getNom()}</option>
                   </c:forEach>
                 </c:if>
-	                <option value="idDuMembre">Prenom et nom du membre</option>
 	            </select>
 	          </div>
 	        </div>

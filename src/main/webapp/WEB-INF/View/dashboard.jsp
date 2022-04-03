@@ -73,9 +73,9 @@
                 	<c:if test="${!empruntsCourant.isEmpty()}">             
                     	<c:forEach items="${empruntsCourant}" var="emprunt">
                         	<tr>
-                          		<td>10</td>
-                          		<td>11</td>
-                          		<td>12</td>
+                          		<td><em>${livre.getById(emprunt.getIdLivre()).getTitre()}, ${livre.getById(emprunt.getIdLivre()).getAuteur()}</td>
+                          		<td>${membre.getById(emprunt.getIdMembre()).getPrenom()}</td>
+                          		<td>${emprunt.getDateEmprunt()}</td>
                           		<td>
                             		<a href="emprunt_return?id=${emprunt.getIdPrimaryKey()}"><ion-icon class="table-item" name="log-in"></a>
                           		</td>

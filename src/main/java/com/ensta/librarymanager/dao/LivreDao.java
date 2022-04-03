@@ -169,7 +169,7 @@ public class LivreDao implements ILivreDao {
 
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			int nombre = rs.getInt(1);
+			int nombre = rs.getInt("count");
 			
 			return nombre;
 		
