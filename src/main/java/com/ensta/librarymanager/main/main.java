@@ -27,7 +27,7 @@ public class main {
 			System.out.println(empruntService.isLivreDispo(0));
 			System.out.println(livreService.getListDispo().get(0).getTitre());
 			System.out.println(membreService.getListMembreEmpruntPossible().get(0).getNom());*/
-			empruntService.create(1, 1, LocalDate.now());
+			//empruntService.create(1, 1, LocalDate.now());
 			System.out.println(empruntService.count());
 		} catch (ServiceException e) {
 			e.printStackTrace();

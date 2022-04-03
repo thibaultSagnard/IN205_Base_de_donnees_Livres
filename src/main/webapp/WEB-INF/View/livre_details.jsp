@@ -21,22 +21,22 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Détails du livre n°${livre.id}</h5>
+      <h5>Details du livre numero ${livre.getIdPrimaryKey()}</h5>
         <div class="row">
-	      <form action="/LibraryManager/livre_details?id=idDuLivre" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="/TP3Ensta/livre_details?id=${livre.getIdPrimaryKey()}" method="post" class="col s12"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="titre" type="text" value="titreDuLivre" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
+	            <input id="titre" type="text" value="${livre.getTitre()}" name="titre"> <!-- TODO : remplacer titreDuLivre par le titre du livre -->
 	            <label for="titre">Titre</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="auteur" type="text" value="auteurDuLivre" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
+	            <input id="auteur" type="text" value="${livre.getAuteur()}" name="auteur"> <!-- TODO : remplacer auteurDuLivre par l'auteur du livre -->
 	            <label for="auteur">Auteur</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="isbn" type="text" value="isbnDuLivre" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
+	            <input id="isbn" type="text" value="${livre.getIsbn()}" name="isbn"> <!-- TODO : remplacer isbnDuLivre par l'isbn du livre -->
 	            <label for="isbn">ISBN 13</label>
 	          </div>
 	        </div>
@@ -46,8 +46,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/livre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	      <form action="/TP3Ensta/livre_delete" method="get" class="col s12">
+	        <input type="hidden" value="${livre.getIdPrimaryKey()}" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le livre
 	            <i class="material-icons right">delete</i>
@@ -67,13 +67,17 @@
               </thead>
               <tbody id="results">
 
-                <tr>
-                  <td>Prénom et nom du membre emprunteur</td>
-                  <td>Date de l'emprunt</td>
-                  <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
-                  </td>
-                </tr>
+				<c:if test="${!Livres.isEmpty()}">             
+                    	<c:forEach items="${Livres}" var="emprunt">
+                    		<tr>
+                       			<td>${emprunt.getIdMembre()}, ${membre.getById(emprunt.getIdMembre()).getPrenom()}</td>
+                          		<td>${emprunt.getDateEmprunt()}</td>
+                        		<td>
+									<a href="emprunt_return?id=${emprunt.getIdPrimaryKey()}"><ion-icon class="table-item" name="log-in"></a>
+                          		</td>
+                    		</tr>
+                    	</c:forEach>
+                   	</c:if>
 
 				<!-- TODO : parcourir la liste des emprunts en cours pour ce livre et les afficher selon la structure d'exemple ci-dessus -->
               </tbody>

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,16 +84,17 @@ private static MembreDao instance;
 		try {
 			Connection conn = ConnectionManager.getConnection();
 			PreparedStatement pstmt = conn
-					.prepareStatement("INSERT INTO membre(nom, prenom, adresse, email, telephone) "
-							+ "VALUES (?, ?, ?, ?, ?, ?);");
+					.prepareStatement("INSERT INTO membre(nom, prenom, adresse, email, telephone, abonnement) "
+							+ "VALUES (?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
 
 			pstmt.setString(1, nom.toUpperCase());
 			pstmt.setString(2, prenom);
 			pstmt.setString(3, adresse);
 			pstmt.setString(4, email);
 			pstmt.setString(5, telephone);
-			//pstmt.setString(6, abonnement.getAbonnement.name());
-
+			Abonnement abonnement = Abonnement.BASIC ;
+			pstmt.setString(6, abonnement.toString());
+			
 			pstmt.executeUpdate();
 			ResultSet resultSet = pstmt.getGeneratedKeys();
 			if (resultSet.next()) {

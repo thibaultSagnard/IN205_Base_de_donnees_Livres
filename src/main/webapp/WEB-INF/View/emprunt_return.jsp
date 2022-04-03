@@ -31,14 +31,14 @@
 	              <c:choose>
 	              	<c:when test="${id != null && !emprunts.isEmpty()}">
                   		<c:forEach items="${emprunts}" var="emprunt">
-                    		<option value="id"> "${livre.getById(emprunt.getIdLivre()).getTitre()}, ${livre.getById(emprunt.getIdLivre()).getAuteur()}", emprunte par ${membre.getById(emprunt.getIdMembre()).getPrenom()} ${membre.getById(emprunt.getMembre()).getNom()} </option>
+                    		<option value="id"> "${livre.getById(emprunt.getIdLivre()).getTitre()}, de ${livre.getById(emprunt.getIdLivre()).getAuteur()}", emprunte par ${membre.getById(emprunt.getIdMembre()).getPrenom()} ${membre.getById(emprunt.getMembre()).getNom()} </option>
                   		</c:forEach>
                  	</c:when>
                   	<c:otherwise>
                     	<option value="" disabled selected>---</option>
                     	<c:if test="${!emprunts.isEmpty()}">
                       		<c:forEach items="${emprunts}" var="emprunt">
-                        		<option value="${emprunt.getIdPrimaryKey()}"> "${emprunt.getIdPrimaryKey()}> ${livre.getById(emprunt.getIdLivre()).getTitre()} ${livre.getById(emprunt.getIdLivre()).getAuteur()}", emprunte par ${membre.getById(emprunt.getIdMembre()).getPrenom()} ${membre.getById(emprunt.getMembre()).getNom()} </option>
+                        		<option value="${emprunt.getIdPrimaryKey()}"> "${emprunt.getIdPrimaryKey()}> ${livre.getById(emprunt.getIdLivre()).getTitre()}, de ${livre.getById(emprunt.getIdLivre()).getAuteur()}", emprunte par ${membre.getById(emprunt.getIdMembre()).getPrenom()} ${membre.getById(emprunt.getMembre()).getNom()} </option>
                       		</c:forEach>
                     	</c:if>
                   	</c:otherwise>

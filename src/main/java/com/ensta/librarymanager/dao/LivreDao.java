@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -103,12 +104,12 @@ public class LivreDao implements ILivreDao {
 	public int create(String titre, String auteur, String isbn) throws DaoException {
 		try {
 			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO livre(titre, auteur, isbn) VALUES (?, ?, ?);");
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO livre(titre, auteur, isbn) VALUES (?, ?, ?)",
+					Statement.RETURN_GENERATED_KEYS);
 			
 			pstmt.setString(1, titre);
 			pstmt.setString(2,  auteur);
 			pstmt.setString(3, isbn);
-			pstmt.executeUpdate();
 			pstmt.executeUpdate();
 			
 			ResultSet resultSet = pstmt.getGeneratedKeys();
@@ -137,6 +138,7 @@ public class LivreDao implements ILivreDao {
 			pstmt.setString(1, titre);
 			pstmt.setString(2,  auteur);
 			pstmt.setString(3, isbn);
+			pstmt.setInt(4, livre.getIdPrimaryKey());
 			
 			pstmt.executeUpdate();
 			
