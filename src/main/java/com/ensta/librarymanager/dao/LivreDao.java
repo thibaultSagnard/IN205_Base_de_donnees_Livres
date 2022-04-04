@@ -54,31 +54,6 @@ public class LivreDao implements ILivreDao {
 		}
 	}
 	
-	/*public List<Livre> getListDispo() throws DaoException { ///à coder WHERE livre dispo avec jointure
-		try {
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT id, titre, auteur, isbn FROM livre");
-
-			ResultSet rs = pstmt.executeQuery();
-			List<Livre> Livres = null;
-
-			while (rs.next()==true) {
-				int id = Integer.parseInt(rs.getString("e.id"));
-				String titre = rs.getString("titre");
-				String auteur = rs.getString("auteur");
-				String isbn = rs.getString("isbn");
-				
-				Livre livre = new Livre(id, titre, auteur, isbn);
-				Livres.add(livre);
-			}
-			
-			return Livres;
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
 	
 	@Override
 	public Livre getById(int id) throws DaoException {

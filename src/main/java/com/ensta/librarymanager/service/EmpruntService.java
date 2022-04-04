@@ -135,21 +135,7 @@ public class EmpruntService implements IEmpruntService {
 			return result; 
 	}
 		
-		
-		/*try {
-			LocalDate dateR = LocalDate.now(); //valeur non nulle par défaut
-			Emprunt emprunt = this.empruntDao.getById(idLivre);
-			dateR = emprunt.getDateRetour();
-			if (dateR==null || emprunt.getDateEmprunt()==null) { //le livre est actuellement emprunté ou jamais emprunté
-				return false;
-			}
-			return true; //sinon il est rendu
-			
-		} catch (DaoException e) {
-			e.printStackTrace();
-			throw new ServiceException();
-		}
-	}*/
+	
 
 	@Override
 	public boolean isEmpruntPossible(Membre membre) throws ServiceException {

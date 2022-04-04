@@ -47,9 +47,6 @@ public class EmpruntDao implements IEmpruntDao{
 				int id = Integer.parseInt(rs.getString("id"));
 				int idMembre = Integer.parseInt(rs.getString("idMembre"));
 				int idLivre = Integer.parseInt(rs.getString("idLivre"));
-				/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-				LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);*/
 	            java.util.Date retour = new java.util.Date();
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 	            Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt);
@@ -86,9 +83,6 @@ public class EmpruntDao implements IEmpruntDao{
 				int id = rs.getInt("id");
 				int idMembre = rs.getInt("idMembre");
 				int idLivre = rs.getInt("idLivre");
-				//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				//LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-				//LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt);
 
@@ -127,33 +121,6 @@ public class EmpruntDao implements IEmpruntDao{
 	            e.printStackTrace();
 				throw new DaoException();
 	        }
-	        
-//			List<Emprunt> result = null;
-//			Connection conn = ConnectionManager.getConnection();
-//			PreparedStatement pstmt = conn.prepareStatement("SELECT e.id AS id, idMembre, nom, prenom, adresse, email,\n"
-//															+ "telephone, abonnement, idLivre, titre, auteur, isbn, dateEmprunt, dateRetour "
-//															+ "FROM emprunt AS e "
-//															+ "INNER JOIN membre ON membre.id = e.idMembre "
-//															+ "INNER JOIN livre ON livre.id = e.idLivre "
-//															+ "WHERE dateRetour IS NULL AND membre.id = ?;");
-//			pstmt.setInt(1, idMembre);
-//			ResultSet rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				int id = rs.getInt("id");
-//				int idLivre = rs.getInt("idLivre");
-//				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//				LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-//				LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);
-//		
-//
-//				Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt, dateRetour);
-//				result.add(emprunt);
-//			}
-//			return result;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			throw new DaoException();
-//		}
 	}
 
 	@Override
@@ -172,10 +139,7 @@ public class EmpruntDao implements IEmpruntDao{
             java.util.Date retour = new java.util.Date();
 			while (rs.next()) {
 				int id = rs.getInt("id");
-				int idMembre = rs.getInt("idMembre");
-				/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-				LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);*/
+				int idMembre = rs.getInt("idMembre");				
 				LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 				Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt);
 				
@@ -213,10 +177,7 @@ public class EmpruntDao implements IEmpruntDao{
             java.util.Date retour = new java.util.Date();
 			rs.next();
 			int idMembre = rs.getInt("idMembre");
-			int idLivre = rs.getInt("idLivre");
-			/*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-			LocalDate dateEmprunt = LocalDate.parse(rs.getString("dateEmprunt"), formatter);
-			LocalDate dateRetour = LocalDate.parse(rs.getString("dateRetour"), formatter);*/
+			int idLivre = rs.getInt("idLivre");			
 			LocalDate dateEmprunt = rs.getDate("dateEmprunt").toLocalDate();
 			Emprunt emprunt = new Emprunt(id, idMembre, idLivre, dateEmprunt);
 
@@ -298,89 +259,5 @@ public class EmpruntDao implements IEmpruntDao{
 		}
 	}
 
-	/*@Override
-	public void returnBook(int id) throws DaoException {
-		try {
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("UPDATE emprunt"
-					+ "SET dateRetour = ? WHERE id = ?");
-			
-	        LocalDate date =LocalDate.now();
-	        String Date = date.toString();
-			pstmt.setString(1, Date);
-			pstmt.setInt(2, id);
-			//delete(id);
-			pstmt.executeUpdate();
-			
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
-
-	/*@Override
-	public boolean isLivreDispo(int idLivre) throws DaoException {
-		try {
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT emprunt.dateRetour FROM emprunt INNER JOIN livre ON livre.id=emprunt.idLivre WHERE livre.id = ?");
-			pstmt.setInt(1, idLivre);
-			ResultSet rs = pstmt.executeQuery();
-			LocalDate dateR = null;
-			if (rs != null) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-				dateR = LocalDate.parse(rs.getString("emprunt.dateRetour"), formatter);
-				if (dateR==null) { //le livre est actuellement emprunté
-					return false;
-				}
-			}
-			return true; //sinon il est rendu ou pas jamais pris
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
-
-	/*@Override
-	public boolean isEmpruntPossible(Membre membre) throws DaoException {
-		try {
-			int idMembre = membre.getIdPrimaryKey();
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("SELECT emprunt.id FROM emprunt INNER JOIN membre ON membre.id=emprunt.idMembre WHERE dateRetour IS NULL AND membre.id = ?");
-			pstmt.setInt(1, idMembre);
-			ResultSet rs = pstmt.executeQuery();
-			
-			int nombre = 0;
-
-			while (rs.next()==true) {
-				nombre+=1;
-			}
-			
-			Abonnement ab = membre.getAbonnement();
-			if ((ab==Abonnement.BASIC && nombre<2) || (ab==Abonnement.PREMIUM && nombre<5) || (ab==Abonnement.VIP && nombre<20)) {
-				return true;
-			}
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
-
-
-	/*@Override
-	public void delete(int id) throws DaoException {
-		try {
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement("DELETE emprunt WHERE id = ?");
-			pstmt.setInt(1, id);
-			pstmt.executeUpdate();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
 
 }

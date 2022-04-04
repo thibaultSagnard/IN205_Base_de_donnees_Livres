@@ -3,12 +3,15 @@
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/modele/Livre.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/LivreService.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/exception/DaoException.java
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/MembreDeleteServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/modele/Membre.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/EmpruntReturnServlet.java
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/MembreDetailsServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/IEmpruntService.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/MembreService.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/EmpruntListServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/ILivreDao.java
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/MembreListServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/ILivreService.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/EmpruntDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/service/IMembreService.java
@@ -17,6 +20,7 @@
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/dao/MembreDao.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/exception/ServiceException.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/LivreAddServlet.java
+/mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/MembreAddServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/servlet/LivreListServlet.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/main/main.java
 /mnt/d/Thibault/ENSTA 2A/Informatique/IN205/CM4/Projet2/src/main/java/com/ensta/librarymanager/modele/Emprunt.java

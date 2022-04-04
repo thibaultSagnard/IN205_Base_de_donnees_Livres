@@ -168,36 +168,6 @@ private static MembreDao instance;
 		}
 	}
 
-	/*public List<Membre> getListMembreEmpruntPossible() throws DaoException {
-		try {
-			List<Membre> result = null;
-			Connection conn = ConnectionManager.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(
-					"SELECT id, nom, prenom, adresse, email, telephone, abonnement FROM membre;");
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				int id = rs.getInt("id");
-				String nom = rs.getString("nom");
-				String prenom = rs.getString("prenom");
-				String adresse = rs.getString("adresse");
-				String email = rs.getString("email");
-				String telephone = rs.getString("telephone");
-				Abonnement abonnement = Abonnement.valueOf(rs.getString("abonnement"));
-				Membre membre = new Membre(id, nom, prenom, adresse, email, telephone, abonnement);
-				EmpruntDao empruntDao =EmpruntDao.getInstance();
-				
-				List<Emprunt> liste = empruntDao.getListCurrentByMembre(id);
-				int nombre = liste.size(); //nombre de livre empruntés et non rendus par la personne
-				if ((abonnement==Abonnement.BASIC && nombre<2) || (abonnement==Abonnement.PREMIUM && nombre<5) || (abonnement==Abonnement.VIP && nombre<20)) {
-					result.add(membre);
-				}
-			}
-			return result;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new DaoException();
-		}
-	}*/
+	
 
 }

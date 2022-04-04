@@ -18,9 +18,9 @@ import com.ensta.librarymanager.service.EmpruntService;
 import com.ensta.librarymanager.service.LivreService;
 import com.ensta.librarymanager.service.MembreService;
 
-@WebServlet("/livre_details")
+@WebServlet("/membre_details")
+public class MembreDetailsServlet extends HttpServlet {
 
-public class LivreDetailsServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -28,23 +28,23 @@ public class LivreDetailsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        System.out.println("/livre_details  doGet");
-        LivreService livreService = LivreService.getInstance();
+        System.out.println("/membre_details  doGet");
         EmpruntService empruntService = EmpruntService.getInstance();
         MembreService membreService = MembreService.getInstance();
-        List<Emprunt> Livres = new ArrayList<>();
+        LivreService livreService = LivreService.getInstance();
+        List<Emprunt> Emprunts = new ArrayList<>();
 
         try {
-            request.setAttribute("livre", livreService.getById(Integer.parseInt(request.getParameter("id"))));
-            Livres = empruntService.getListCurrentByLivre(Integer.parseInt(request.getParameter("id")));
+            request.setAttribute("membre", membreService.getById(Integer.parseInt(request.getParameter("id"))));
+            Emprunts = empruntService.getListCurrentByMembre(Integer.parseInt(request.getParameter("id")));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
         
-        request.setAttribute("Livres", Livres);
-        request.setAttribute("membre", membreService);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/View/livre_details.jsp");
+        request.setAttribute("emprunts", Emprunts);
+        request.setAttribute("livre", livreService);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/View/membre_details.jsp");
         dispatcher.forward(request, response);
     }
 

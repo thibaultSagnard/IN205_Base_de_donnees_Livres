@@ -21,42 +21,62 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Détails du membre n°007</h5> <!-- TODO : remplacer 007 par l'id du membre -->
+      <h5>Details du membre numero ${membre.getIdPrimaryKey()}</h5> <!-- TODO : remplacer 007 par l'id du membre -->
         <div class="row">
-	      <form action="/LibraryManager/membre_details?id=idDuMembre" method="post" class="col s12"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
+	      <form action="/TP3Ensta/membre_details?id=${membre.getIdPrimaryKey()}" method="post" class="col s12"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
 	        <div class="row">
 	          <div class="input-field col s4">
-	            <input id="nom" type="text" value="nomDuMembre" name="nom"> <!-- TODO : remplacer nomDuMembre par le nom du membre -->
+	            <input id="nom" type="text" value="${membre.getNom()}" name="nom"> <!-- TODO : remplacer nomDuMembre par le nom du membre -->
 	            <label for="nom">Nom</label>
 	          </div>
 	          <div class="input-field col s4">
-	            <input id="prenom" type="text" value="prenomDuMembre" name="prenom"> <!-- TODO : remplacer prenomDuMembre par le prénom du membre -->
-	            <label for="prenom">Prénom</label>
+	            <input id="prenom" type="text" value="${membre.getPrenom()}" name="prenom"> <!-- TODO : remplacer prenomDuMembre par le prï¿½nom du membre -->
+	            <label for="prenom">Prenom</label>
 	          </div>
 	          <div class="input-field col s4">
 	            <select name="abonnement" class="browser-default">
-	              <!-- TODO : faire en sorte que l'option correspondant à l'abonnement du membre soit sélectionnée par défaut -->
-	              <!-- Pour cela, vous devez rajouter l'attribut selecter sur la balise <option> concernée -->
-	              <option value="BASIC" ${(membre.abonnement == "BASIC") ? " selected" : ""}>Abonnement BASIC</option>
-	              <option value="PREMIUM" ${(membre.abonnement == "PREMIUM") ? " selected" : ""}>Abonnement PREMIUM</option>
-	              <option value="VIP" ${(membre.abonnement == "VIP") ? " selected" : ""}>Abonnement VIP</option>
+	              <!-- TODO : faire en sorte que l'option correspondant a l'abonnement du membre soit sï¿½lectionnï¿½e par dï¿½faut -->
+	              <!-- Pour cela, vous devez rajouter l'attribut selecter sur la balise <option> concernï¿½e -->
+	              <c:choose>
+						<c:when test="${membre.getAbonnement() == 'BASIC'}">
+							<option value="BASIC" selected>Abonnement BASIC</option>
+							<option value="PREMIUM">Abonnement PREMIUM</option>
+							<option value="VIP">Abonnement VIP</option>
+						</c:when>
+						<c:when test="${membre.getAbonnement() == 'PREMIUM'}">
+							<option value="BASIC">Abonnement BASIC</option>
+							<option value="PREMIUM" selected>Abonnement PREMIUM</option>
+							<option value="VIP">Abonnement VIP</option>
+						</c:when>
+						<c:when test="${membre.getAbonnement() == 'VIP'}">
+							<option value="BASIC">Abonnement BASIC</option>
+							<option value="PREMIUM">Abonnement PREMIUM</option>
+							<option value="VIP" selected>Abonnement VIP</option>
+						</c:when>
+						<c:otherwise>
+							<option value="" disabled selected>---</option>
+							<option value="BASIC">Abonnement BASIC</option>
+							<option value="PREMIUM">Abonnement PREMIUM</option>
+							<option value="VIP">Abonnement VIP</option>
+						</c:otherwise>
+					</c:choose>
 	            </select>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s12">
-	            <input id="adresse" type="text" value="adresseDuMembre" name="adresse"> <!-- TODO : remplacer adresseDuMembre par l'adresse du membre -->
+	            <input id="adresse" type="text" value="${membre.getAdresse()}" name="adresse"> <!-- TODO : remplacer adresseDuMembre par l'adresse du membre -->
 	            <label for="adresse">Adresse</label>
 	          </div>
 	        </div>
 	        <div class="row">
 	          <div class="input-field col s6">
-	            <input id="email" type="email" value="emailDuMembre" name="email"> <!-- TODO : remplacer emailDuMembre par l'email du membre -->
+	            <input id="email" type="email" value="${membre.getMail()}" name="email"> <!-- TODO : remplacer emailDuMembre par l'email du membre -->
 	            <label for="email">E-mail</label>
 	          </div>
 	          <div class="input-field col s6">
-	            <input id="telephone" type="tel" value="telephoneDuMembre" name="telephone"> <!-- TODO : remplacer telephoneDuMembre par le téléphone du membre -->
-	            <label for="telephone">Téléphone</label>
+	            <input id="telephone" type="tel" value="${membre.getTelephone()}" name="telephone"> <!-- TODO : remplacer telephoneDuMembre par le tï¿½lï¿½phone du membre -->
+	            <label for="telephone">Telephone</label>
 	          </div>
 	        </div>
 	        <div class="row center">
@@ -65,8 +85,8 @@
 	        </div>
 	      </form>
 	      
-	      <form action="/LibraryManager/membre_delete" method="get" class="col s12">
-	        <input type="hidden" value="idDuMembre" name="id"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
+	      <form action="/TP3Ensta/membre_delete" method="get" class="col s12">
+	        <input type="hidden" value="${membre.getIdPrimaryKey()}" name="id"> <!-- TODO : remplacer idDuMembre par l'id du membre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer le membre
 	            <i class="material-icons right">delete</i>
@@ -88,10 +108,10 @@
 
                 <c:forEach var="emprunt" items="${emprunts}">
                 <tr>
-                  <td>Prénom et nom du membre emprunteur</td>
-                  <td>Date de l'emprunt</td>
+                 	<td><em>"${livre.getById(emprunt.getIdLivre()).getTitre()}" de ${livre.getById(emprunt.getIdLivre()).getAuteur()}</td>
+					<td>${emprunt.getDateEmprunt()}</td>
                   <td>
-                    <a href="emprunt_return?id=idDeLEmprunt"><ion-icon class="table-item" name="log-in"></a>
+                    <a href="emprunt_return?id=${emprunt.getIdPrimaryKey()}"><ion-icon class="table-item" name="log-in"></a>
                   </td>
                 </tr>
                 </c:forEach>

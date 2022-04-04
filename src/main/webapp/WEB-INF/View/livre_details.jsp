@@ -70,7 +70,7 @@
 				<c:if test="${!Livres.isEmpty()}">             
                     	<c:forEach items="${Livres}" var="emprunt">
                     		<tr>
-                       			<td>${emprunt.getIdMembre()}, ${membre.getById(emprunt.getIdMembre()).getPrenom()}</td>
+                       			<td>${membre.getById(emprunt.getIdMembre()).getPrenom()} ${membre.getById(emprunt.getIdMembre()).getNom()}</td>
                           		<td>${emprunt.getDateEmprunt()}</td>
                         		<td>
 									<a href="emprunt_return?id=${emprunt.getIdPrimaryKey()}"><ion-icon class="table-item" name="log-in"></a>

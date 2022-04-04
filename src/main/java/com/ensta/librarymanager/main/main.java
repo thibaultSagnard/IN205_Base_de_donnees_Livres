@@ -28,7 +28,10 @@ public class main {
 			System.out.println(livreService.getListDispo().get(0).getTitre());
 			System.out.println(membreService.getListMembreEmpruntPossible().get(0).getNom());*/
 			//empruntService.create(1, 1, LocalDate.now());
-			System.out.println(empruntService.count());
+			//System.out.println(empruntService.count());
+			//System.out.println(membreService.getList().get(0).getAbonnement());
+
+
 		} catch (ServiceException e) {
 			e.printStackTrace();
 		}

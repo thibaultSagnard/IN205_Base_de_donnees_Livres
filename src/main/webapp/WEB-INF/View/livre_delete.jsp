@@ -21,16 +21,16 @@
       </div>
       <div class="row">
       <div class="container">
-      <h5>Suppression du livre n°42</h5> <!-- TODO : afficher l'id du livre au lieu de 42 -->
+      <h5>Suppression du livre numero ${livre.getIdPrimaryKey()}</h5> <!-- TODO : afficher l'id du livre au lieu de 42 -->
         <div class="row">
-          <p>etes-vous sur de vouloir supprimer le livre TitreDuLivre de NomDeLAuteur (code isbnDuLivre) ?</p> <!-- TODO : completer les trois informations ci-contre -->
+          <p>etes-vous sur de vouloir supprimer le livre ${livre.getTitre()} de ${livre.getAuteur()} (code ${livre.getIsbn()}) ?</p> <!-- TODO : completer les trois informations ci-contre -->
 	      <form action="/TP3Ensta/livre_delete" method="post" class="col s12">
-            <input type="hidden" value="idDuLivre" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+            <input type="hidden" value="${livre.getIdPrimaryKey()}" name="id"> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        <div class="row center">
 	          <button class="btn waves-effect waves-light red" type="submit">Supprimer
 	            <i class="material-icons right">delete</i>
 	          </button>
-	          <a class="btn waves-effect waves-light orange" href="/TP3Ensta/livre_details?id=idDuLivre">Annuler</a> <!-- TODO : remplacer idDuLivre par l'id du livre -->
+	          <a class="btn waves-effect waves-light orange" href="/TP3Ensta/livre_details?id=${livre.getIdPrimaryKey()}">Annuler</a> <!-- TODO : remplacer idDuLivre par l'id du livre -->
 	        </div>
 	      </form>
 	    </div>	    
